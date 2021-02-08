@@ -18,8 +18,17 @@ So, used install.packages to add
 - shiny
 - wordcloud
 - remotes
+- rsconnect (to allow deployment to shinyapps.io)
 
 and used `remotes::install_github("dgrtwo/stackr")`
 
 (indeed, I could have cloned the rstudio-prereqs environment rather than the
 shiny-base environment when making shiny-wordcloud)
+
+Then configured rsconnect for pushing to shinyapps.io:
+As described at shinyapps.io (rsconnect::setAccountInfo(blah, secret, ....))
+
+```
+library(rsconnect)
+rsconnect::deployApp()
+```
