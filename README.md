@@ -1,5 +1,14 @@
 # Make a wordcloud of a stack-overflow user's "tag"s
 
+This app shows a wordcloud, where the word sizes are scaled according to the
+number of times a stack-overflow user has answered questions for a particular
+tag.
+
+It was developed to work out how to deploy a shiny app to shinyapps.io
+
+Thanks to the developers of {shiny}, {wordcloud} (for generating the wordcloud
+image) and {stackr} (for accessing stackoverflow data)
+
 ## Define the environment
 
 Use renv inside a conda env !!!!
