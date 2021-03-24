@@ -1,10 +1,15 @@
 # Plot a wordcloud to summarise the tags that a stack-overflow user tends to
 # answer/ask about
 
-library(dplyr)
-library(shiny)
-library(wordcloud)
-library(stackr)
+pkgs <- c(
+  "bslib", "dplyr", "grDevices", "shiny", "stackr", "wordcloud"
+)
+
+for (pkg in pkgs) {
+  suppressPackageStartupMessages(
+    library(pkg, character.only = TRUE)
+  )
+}
 
 # Constants
 
@@ -25,7 +30,7 @@ so_palette <- grDevices::colorRampPalette(colours[1:2])(6)
 
 # - overall theme for the shiny app
 
-theme <- bs_theme(
+theme <- bslib::bs_theme(
   fg = colours["black"],
   bg = colours["white"],
   primary = colours["blue"],
@@ -97,4 +102,4 @@ server <- function(input, output) {
 }
 
 # Run the application
-shinyApp(ui = ui, server = server)
+shiny::shinyApp(ui = ui, server = server)
