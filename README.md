@@ -41,3 +41,8 @@ As described at shinyapps.io (rsconnect::setAccountInfo(blah, secret, ....))
 library(rsconnect)
 rsconnect::deployApp()
 ```
+
+## Notes
+
+Don't include .Rprofile when deploying to shinyapps.io (the deployed app won't
+be able to find the `renv/activate` script)
