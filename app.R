@@ -8,6 +8,8 @@ library(stackr)
 
 # Constants
 
+# - colours were obtained from inspecting the stack overflow site
+
 colours <- c(
   "orange" = "#f48024",
   "green" = "#5eba7d",
@@ -17,7 +19,11 @@ colours <- c(
   "white" = "#fff"
 )
 
+# - colour scheme for use in the wordcloud
+
 so_palette <- grDevices::colorRampPalette(colours[1:2])(6)
+
+# - overall theme for the shiny app
 
 theme <- bs_theme(
   fg = colours["black"],
