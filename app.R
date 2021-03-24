@@ -6,6 +6,26 @@ library(shiny)
 library(wordcloud)
 library(stackr)
 
+# Constants
+
+colours <- c(
+  "orange" = "#f48024",
+  "green" = "#5eba7d",
+  "blue" = "#0077cc",
+  "black" = "#0c0d0e",
+  "grey" = "#d6d9dc",
+  "white" = "#fff"
+)
+
+so_palette <- grDevices::colorRampPalette(colours[1:2])(6)
+
+theme <- bs_theme(
+  fg = colours["black"],
+  bg = colours["white"],
+  primary = colours["blue"],
+  secondary = colours["grey"]
+)
+
 # Helper functions
 
 format_answer_score_table <- function(df) {
@@ -15,14 +35,14 @@ format_answer_score_table <- function(df) {
     dplyr::arrange(dplyr::desc(answer_score))
 }
 
-make_word_cloud <- function(df) {
+make_word_cloud <- function(df, palette) {
   with(
     df,
     wordcloud::wordcloud(
       words = tag_name,
       freq = answer_score,
       min.freq = 0,
-      colors = RColorBrewer::brewer.pal(6, "Purples")[-1],
+      colors = palette,
       scale = c(10, 0.5)
     )
   )
@@ -32,6 +52,7 @@ make_word_cloud <- function(df) {
 # overflow presence
 
 ui <- fluidPage(
+  theme = theme,
 
   # Application title
   titlePanel("Stack Overflow: User Statistics"),
@@ -61,7 +82,7 @@ server <- function(input, output) {
   )
 
   output$word_cloud <- renderPlot(
-    make_word_cloud(stack_data())
+    make_word_cloud(stack_data(), so_palette)
   )
 
   output$answer_table <- renderTable(
