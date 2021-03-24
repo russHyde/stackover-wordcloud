@@ -42,10 +42,12 @@ ui <- fluidPage(
       textInput("user_id", "Select a Stack Overflow user ID:", "1845650")
     ),
 
-    # Show a plot of a wordcloud of the user's answer-tags
+    # Show a plot of a wordcloud and table of the user's answer-tags
     mainPanel(
-      plotOutput("word_cloud"),
-      tableOutput("answer_table")
+      tabsetPanel(
+        tabPanel("Word Cloud", plotOutput("word_cloud")),
+        tabPanel("Answer Table", tableOutput("answer_table"))
+      )
     )
   )
 )
